@@ -410,10 +410,6 @@ RedNaoFormBuilder.prototype.ScrollSettings = function () {
 
 
 RedNaoFormBuilder.prototype.CloneFormElement=function(jQueryElement){
-    if(this.RedNaoFormElements.length>=7&&!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, this version only support up to 8 fields'))
-    {
-        return;
-    }
     var formObject=this.GetFormElementByContainer(jQueryElement);
     var newElement= formObject.Clone();
 
