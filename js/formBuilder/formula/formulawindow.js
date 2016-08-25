@@ -33,9 +33,6 @@ function RedNaoFormulaWindow()
                     if(self.Image!=null)
                         self.Image.attr('src',smartFormsRootPath+'images/formula_used.png')
                     self.SelectedFormElementOptions.Formulas[self.PropertyName]=data;
-
-                    if(data.FieldsUsed.length>3&&!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, in this version you can add up to three fields in a formula'))
-                        return false;
                 }
 
 

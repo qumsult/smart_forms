@@ -51,17 +51,7 @@ RedNaoEmailEditor.prototype.InitializeFocusEvents=function()
 
 RedNaoEmailEditor.prototype.EmailConfigurationIsValid=function()
 {
-    for(var i=0;i<this.Emails.length;i++)
-    {
-        if(this.Emails[i].ToEmail.indexOf("[field")==0||this.Emails[i].FromEmail.indexOf("[field")==0)
-        {
-            if(!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, you can\'t add fields to the "To Email" box in this version, please use only emails '))
-            {
-                return false;
-            }
-        }
-    }
-
+    return true;
 };
 
 RedNaoEmailEditor.prototype.SetUpFixedFields=function()
@@ -103,13 +93,6 @@ RedNaoEmailEditor.prototype.UpdateFromEmail=function()
     var selectedEmailsString="";
     for(var i=0;i<selectedToEmails.length;i++)
     {
-        if(selectedToEmails[i].indexOf("[field")==0)
-        {
-            if(!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, you can\'t add fields to the "To Email" box in this version, please use only emails '))
-            {
-                return false;
-            }
-        }
         selectedEmailsString=selectedToEmails[i];
     }
     this.Emails[0].FromEmail=selectedEmailsString;
@@ -423,10 +406,6 @@ RedNaoEmailEditor.prototype.AddFieldToEmail=function(id)
         tinymce.activeEditor.execCommand('mceInsertContent', false,field );
     else
     {
-        if(!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, you can\'t add fields to the "subject" box in this version, please type the subject that you want to use'))
-        {
-            return false;
-        }
         rnJQuery('#redNaoEmailSubject').val(rnJQuery('#redNaoEmailSubject').val() + field).focus();
     }
 };

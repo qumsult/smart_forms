@@ -70,11 +70,6 @@ function RedNaoFormBuilder(smartFormsOptions,formElementsOptions,formClientOptio
 
 RedNaoFormBuilder.prototype.FormTypeChanged=function()
 {
-    if(rnJQuery('#rnFormType').val()=='sec'&&!RedNaoLicensingManagerVar.LicenseIsValid("Sorry, this version doesn't support multi steps forms"))
-    {
-        rnJQuery('#rnFormType').val('nor');
-        return;
-    }
 
     if(rnJQuery('#rnFormType').val()=='sec')
     {

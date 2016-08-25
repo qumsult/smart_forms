@@ -255,13 +255,8 @@ rnJQuery(function () {
         }},
             {beforeSubmit:function(){alert('eaea')}},
             {beforeSubmit:function(){alert('eaea1')}},
-            {beforeSubmit:function(){
-                if(!RedNaoLicensingManagerVar.LicenseIsValid("Sorry, you need a license to delete a record"))
-                {
-                    return [false,'A license is required'];
-                }{
-                    return [true];
-                }
+            {beforeSubmit:function(){              
+                    return [true];                
                 },
                 afterSubmit:function(response,postData){
                     try
@@ -282,13 +277,8 @@ rnJQuery(function () {
         );
 
         rnJQuery("#grid").jqGrid('navButtonAdd','#pager',{
-            caption:"Export to csv (pro)",
+            caption:"Export to csv",
             onClickButton : function () {
-                if(!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, exporting to csv is only supported in the pro version'))
-                {
-                    return;
-                }
-
                 var startDate = rnJQuery.datepicker.formatDate('yy-mm-dd', rnJQuery('#dpStartDate').datepicker('getDate'));
                 var endDate = rnJQuery.datepicker.formatDate('yy-mm-dd', rnJQuery('#dpEndDate').datepicker('getDate'));
                 var form = rnJQuery('#cbForm').val();
