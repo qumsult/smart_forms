@@ -1,5 +1,5 @@
 <?php
-
+/*
 require_once SMART_FORMS_DIR. 'smart-forms-bootstrap.php';
 wp_enqueue_style("smart-forms-add-ons",SMART_FORMS_DIR_URL.'css/screens/add_ons.css');
 
@@ -78,4 +78,6 @@ wp_enqueue_script("smart-forms-add-ons",SMART_FORMS_DIR_URL.'js/main_screens/sma
 			<div class="panel-footer"><span class="sfLearnMore">&nbsp;</span></div>
 		</div>
 	</div>
-</div>
+</div>*/
+?>
+<iframe style="display: block;width:100%;height:1400px;" src="https://smartforms.rednao.com/add-ons-store/"></iframe>

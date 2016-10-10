@@ -25,12 +25,11 @@ function rednao_smart_forms_load_form($title,$form_id,$returnComponent)
     wp_enqueue_script('smart-forms-event-manager',SMART_FORMS_DIR_URL.'js/formBuilder/eventmanager.js',array('isolated-slider'));
     wp_enqueue_script('smart-forms-generator-interface',SMART_FORMS_DIR_URL.'js/subscriber_interfaces/ismart-forms-generator.js',array('isolated-slider'));
     wp_enqueue_script('isolated-slider',plugin_dir_url(__FILE__).'js/rednao-isolated-jq.js');
-    wp_enqueue_script('smart-forms-generator',plugin_dir_url(__FILE__).'js/form-generator.js',array('isolated-slider','smart-forms-event-manager','smart-forms-generator-interface'));
-    wp_enqueue_script('smart-forms-form-elements',plugin_dir_url(__FILE__).'js/formBuilder/formelements.js',array('smart-forms-generator'));
+    wp_enqueue_script('smart-forms-generator',plugin_dir_url(__FILE__).'js/form-generator.js',array('isolated-slider','smart-forms-event-manager','smart-forms-generator-interface','smart-forms-form-elements'));
+    wp_enqueue_script('smart-forms-form-elements',plugin_dir_url(__FILE__).'js/formBuilder/formelements.js',array('isolated-slider'));
     wp_enqueue_script('smart-forms-formula',SMART_FORMS_DIR_URL.'js/formBuilder/formula/formula.js',array('isolated-slider','smart-forms-event-manager'));
     wp_enqueue_script('smart-forms-formula-manager',SMART_FORMS_DIR_URL.'js/formBuilder/formula/formulamanager.js',array('isolated-slider','smart-forms-event-manager','smart-forms-formula'));
     wp_enqueue_script('smart-forms-elements-manipulators',SMART_FORMS_DIR_URL.'js/formBuilder/properties/manipulators.js',array('isolated-slider'));
-	wp_enqueue_script('smart-forms-icheck',SMART_FORMS_DIR_URL.'js/utilities/iCheck/icheck.min.js',array('isolated-slider'));
 	wp_enqueue_script('smart-forms-conditional-handlers',SMART_FORMS_DIR_URL.'js/conditional_manager/conditional-handlers.js',array('isolated-slider'));
 	do_action('smart_forms_pr_add_form_elements_extensions');
 	require_once(SMART_FORMS_DIR.'translations/form-elements-translation.php');
@@ -38,8 +37,7 @@ function rednao_smart_forms_load_form($title,$form_id,$returnComponent)
 
     wp_enqueue_style('smart-forms-Slider',SMART_FORMS_DIR_URL.'css/smartFormsSlider/jquery-ui-1.10.2.custom.min.css');
     wp_enqueue_style('smart-forms-custom-elements',plugin_dir_url(__FILE__).'css/formBuilder/custom.css');
-	wp_enqueue_style('form-builder-icheck-normal',SMART_FORMS_DIR_URL.'js/utilities/iCheck/skins/minimal/minimal.css');
-	wp_enqueue_style('form-builder-icheck-normal-red',SMART_FORMS_DIR_URL.'js/utilities/iCheck/skins/minimal/red.css');
+
 
     $random=rand();
 

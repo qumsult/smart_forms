@@ -2516,7 +2516,7 @@
 }
 .bootstrap-wrapper .radio label,
 .bootstrap-wrapper .checkbox label {
-  padding-left: 20px;
+  padding-left: 22px;
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
@@ -2527,7 +2527,7 @@
 .bootstrap-wrapper .checkbox-inline input[type="checkbox"] {
   position: absolute;
   margin-top: 4px \9;
-  margin-left: -20px;
+
 }
 .bootstrap-wrapper .radio + .radio,
 .bootstrap-wrapper .checkbox + .checkbox {
@@ -6350,3 +6350,166 @@
 
 
 }
+
+
+
+
+
+
+
+.redNaoCheckBox {
+  position: relative !important;
+  padding-left: 30px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  border:none !important;
+  line-height: normal !important;
+}
+.redNaoCheckBox:before, .redNaoCheckBox:after {
+  font-family: FontAwesome !important;
+  font-size: 21px !important;
+  /*absolutely positioned*/
+  color:#777777;
+  position: absolute; top: 0; left: 0!important;
+}
+
+.has-error .redNaoCheckBox:before,.has-error .redNaoCheckBox:after {
+  color:#a94442;
+}
+
+
+.redNaoCheckBox:before {
+  content: '\f096'!important; /*unchecked*/
+}
+.redNaoCheckBox:after {
+  content: '\f046'!important; /*checked*/
+  /*checked icon will be hidden by default by using 0 max-width and overflow hidden*/
+  max-width: 0 !important;
+  overflow: hidden !important;
+  opacity: 0.5 !important;
+  /*CSS3 transitions for animated effect*/
+  transition: all 0.35s !important;
+}
+
+/*hiding the original checkboxes*/
+.redNaoInputCheckBox {
+  display: none !important;
+  border:none !important;
+  height: auto !important;
+}
+/*when the user checks the checkbox the checked icon will animate in*/
+.redNaoInputCheckBox:checked + .redNaoCheckBox:after {
+  max-width: 25px !important; /*an arbitratry number more than the icon's width*/
+  opacity: 1 !important; /*for fade in effect*/
+  color:black;
+}
+
+
+.redNaoPrepend.input-group-addon{
+  transition: background-color .35s, color .35s;
+}
+
+
+
+
+
+
+
+
+.redNaoRadio  {
+  position: relative !important;;
+  padding-left: 30px !important;;
+  font-size: 14px !important;;
+  cursor: pointer !important;;
+  border:none !important;;
+  line-height: normal !important;
+}
+.redNaoRadio:before, .redNaoRadio:after {
+  font-family: FontAwesome !important;;
+  font-size: 21px !important;;
+  /*absolutely positioned*/
+  position: absolute; top: 0; left: 0 !important;;
+  color:#777777;
+}
+
+.has-error .redNaoRadio:before,.has-error .redNaoRadio:after {
+  color:#a94442;
+}
+
+.redNaoRadio:before {
+  content: '\f10c' !important;; /*unchecked*/
+}
+.redNaoRadio:after {
+  content: '\f111' !important;; /*checked*/
+  /*checked icon will be hidden by default by using 0 max-width and overflow hidden*/
+  max-width: 0 !important;;
+  transform:translate(10px,0) scale(0) !important;;
+  /*CSS3 transitions for animated effect*/
+  transition: all 0.25s !important;
+  color:black;
+}
+
+
+/*hiding the original checkboxes*/
+.redNaoInputRadio {
+  display: none !important;
+  border:none !important;
+  height: auto !important;
+}
+/*when the user checks the checkbox the checked icon will animate in*/
+.redNaoInputRadio:checked + .redNaoRadio:after {
+  max-width: 25px !important;; /*an arbitratry number more than the icon's width*/
+  transform:translate(0,0) scale(.5) !important;;
+}
+
+.redNaoInputRadio:checked + .redNaoRadio:before {
+  max-width: 25px !important;; /*an arbitratry number more than the icon's width*/
+  color:black;
+}
+
+
+.redNaoInputRadio:checked + .redNaoRadio:after {
+  color:black;
+}
+
+/*
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+
+  .bootstrap-wrapper .checkbox .redNaoCheckBox {
+    position:static !important;
+    display: inline !important;
+    padding:0 !important;
+    margin-top: 0px !important;
+  }
+
+  .redNaoInputCheckBox,.redNaoCheckBox-inline {
+    position:static !important;
+    display: inline !important;
+    padding-left:0 !important;
+    margin:0 !important;
+  }
+
+  .redNaoInputRadio {
+    position:static !important;
+    display: inline !important;
+    padding:0 !important;
+    margin-top: 0px !important;
+  }
+
+  .bootstrap-wrapper .redNaoRadio  {
+    position:static !important;
+    display: inline !important;
+    padding-left:0 !important;
+  }
+
+
+  .redNaoRadio:before, .redNaoRadio:after {
+    display: none !important;
+  }
+
+  .redNaoCheckBox:before, .redNaoCheckBox:after {
+    display: none !important;
+  }
+}
+*/

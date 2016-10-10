@@ -29,7 +29,7 @@ class rednao_radio_renderer extends  rednao_base_elements_renderer{
     {
         $array= Array();
         foreach($formElement["Options"] as $value)
-            if($value["label"]==$entry["value"])
+            if(trim($value["label"])==$entry["value"])
             {
                 array_push($array,$value);
             }

@@ -5,7 +5,7 @@
  * Description: Place diferent form of donations on your blog...
  * Author: RedNao
  * Author URI: http://rednao.com
- * Version: 2.3.23
+ * Version: 2.5.1
  * Text Domain: Smart Forms
  * Domain Path: /languages/
  * Network: true
@@ -43,6 +43,8 @@ require_once('smart-forms-config.php');
 require_once(SMART_FORMS_DIR.'integration/smart-donations-integration-ajax.php');
 require_once('smart-forms-ajax.php');
 require_once(SMART_FORMS_DIR.'widgets/smart-form-widget.php');
+require_once (SMART_FORMS_DIR.'php_classes/api/SFApiActions.php');
+require_once (SMART_FORMS_DIR.'php_classes/api/SFApiFilters.php');
 
 add_shortcode('sform','rednao_smart_form_short_code');
 
@@ -53,6 +55,7 @@ add_action( 'wp_ajax_rednao_smart_forms_dont_show_again', 'rednao_smart_forms_do
 add_action( 'wp_ajax_rednao_smart_form_short_code_setup', 'rednao_smart_form_short_code_setup' );
 add_action( 'wp_ajax_rednao_smart_forms_entries_list', 'rednao_smart_forms_entries_list' );
 add_action( 'wp_ajax_rednao_smart_forms_save_form_values','rednao_smart_forms_save_form_values');
+add_action( 'wp_ajax_rednao_smart_forms_edit_form_values','rednao_smart_forms_edit_form_values');
 add_action( 'wp_ajax_nopriv_rednao_smart_forms_save_form_values','rednao_smart_forms_save_form_values');
 add_action( 'wp_ajax_rednao_smart_form_send_test_email','rednao_smart_form_send_test_email');
 add_action('wp_ajax_rednao_smart_forms_submit_license','rednao_smart_forms_submit_license');
@@ -63,7 +66,11 @@ add_action('wp_ajax_rednao_smart_forms_get_form_options','rednao_smart_forms_get
 add_action('wp_ajax_rednao_get_context_tutorials','rednao_get_context_tutorials');
 add_action('wp_ajax_rednao_smart_forms_send_test','rednao_smart_forms_send_test');
 
-
+//api
+$apiActions=new SFApiActions();
+$apiActions->register_hooks();
+$apiFilters=new SFApiFilters();
+$apiFilters->register_hooks();
 //integration
 
 add_action('wp_ajax_rednao_smart_forms_get_campaigns','rednao_smart_forms_get_campaigns');
@@ -74,6 +81,9 @@ add_action('admin_init','rednao_smart_forms_plugin_was_activated');
 register_activation_hook(__FILE__,'rednao_smart_forms_plugin_was_activated');
 
 add_action('admin_menu','rednao_smart_forms_create_menu');
+
+
+
 
 
 function rednao_smart_forms_create_menu(){

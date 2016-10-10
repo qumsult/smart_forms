@@ -17,10 +17,10 @@ function RedNaoLicensingManager()
                     rnJQuery( this ).dialog( "close" );
                 }
             },create: function(event, ui){
-                rnJQuery('.ui-dialog').wrap('<div class="smartFormsSlider" />');
+                rnJQuery('.ui-dialog').wrap('<div class="smartFormsSlider licenseDiv" />');
             },
             open: function(event, ui){
-                rnJQuery('.ui-widget-overlay').wrap('<div class="smartFormsSlider" />');
+                rnJQuery('.ui-widget-overlay').wrap('<div class="smartFormsSlider licenseDiv" />');
 
             }
         });

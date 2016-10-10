@@ -175,7 +175,7 @@ class php_entry_saver_base {
 			return true;
 
         if($FromName=="")
-            $FromName="Wordpress@wordpress.com";
+            $FromName="Wordpress";
 
         if($EmailSubject=="")
             $EmailSubject="Form Submitted";
@@ -219,7 +219,14 @@ class php_entry_saver_base {
 
 		}
 
-        $headers = 'MIME-Version: 1.0' . "\r\n";
+		if($FromEmail=="")
+			$FromEmail=get_option( 'admin_email' );
+
+		if($FromEmail=="")
+			$FromEmail="wordpress@wordpress.com";
+
+
+		$headers = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $headers.= "From: $FromName <$FromEmail>". "\r\n";
 		$headers.= "Reply-To: $FromName <$FromEmail>";
@@ -251,7 +258,23 @@ class php_entry_saver_base {
 
 			}
 			$toEmailArray=array_filter($toEmailArray);
-            return wp_mail($finalToEmails, $EmailSubject, $EmailText, $headers);
+
+            $emailParams=array(
+                            "EmailContent"=>array(
+                                "ToEmail"=>$finalToEmails,
+                                "Subject"=>$EmailSubject,
+                                "EmailText"=>$EmailText,
+                                "Headers"=>$headers,
+                                "Attachments"=>Array()
+                            ),
+                            "FormOptions"=>$formOptions,
+							"InsertEntry"=>$preInsertEntry
+                        );
+
+
+            $emailParams=apply_filters('smart_forms_before_sending_email',$emailParams);
+			$emailContent=$emailParams["EmailContent"];
+            return wp_mail($emailContent["ToEmail"],$emailContent["Subject"],$emailContent["EmailText"],$emailContent["Headers"],$emailContent["Attachments"]);
         }
 
         return false;

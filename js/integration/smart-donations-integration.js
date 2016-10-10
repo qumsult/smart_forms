@@ -1,10 +1,3 @@
-
-SmartFormsAddNew.prototype.GoToSmartDonations=function()
-{
-    this.ActivateTab('smartDonations');
-}
-
-
 function SmartDonationsIntegration()
 {
     this.comboCurrencies=rnJQuery("#smartDonationsCurrencyDropDown");
@@ -56,7 +49,7 @@ SmartDonationsIntegration.prototype.LoadFormValuesIfAny=function()
             rnJQuery('#redNaoSendThankYouEmail').attr('checked','checked');
 
     }
-}
+};
 
 
 SmartDonationsIntegration.prototype.SetUpCampaignCombo=function()

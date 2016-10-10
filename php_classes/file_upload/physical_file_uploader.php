@@ -23,6 +23,7 @@ class physical_file_uploader {
 			{
 				$fieldElement["path"]=$path["url"];
 				$fieldElement["type"]=$path["type"];
+				$fieldElement["ppath"]=$path["file"];
 			}
 			else
 				return array("success"=>false,

@@ -4,12 +4,14 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=edsev
 Tags: form, forms, form builder, form maker, form creator, form generator, contact form, form widget, form plugin, bootstrap forms, jquery forms, form manager, ajax forms
 Requires at least: 3.3
 Tested up to: 4.6
-Stable tag: 2.3.23
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Form creation made easy so you have an easy time building a professional form. Build forms like a web designer without coding.
 == Description ==
+[Demo](http://smartforms.rednao.com/demo/)
+
 So you want to create a beautiful form, the problem is that you are not a web designer nor javascript programmer and of course you have no time to learn any of that?, well, if that is you (or your client) this is the plugin for you.
 
 This plugin is focused in making really easy the process of creating your forms, with it you can add formulas to calculate totals (it doesn't matter if your totals require complex calculations) or show the fields that you need just when you need them.

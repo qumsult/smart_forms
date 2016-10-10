@@ -70,6 +70,11 @@ function RedNaoFormBuilder(smartFormsOptions,formElementsOptions,formClientOptio
 
 RedNaoFormBuilder.prototype.FormTypeChanged=function()
 {
+    if(rnJQuery('#rnFormType').val()=='sec'&&!RedNaoLicensingManagerVar.LicenseIsValid("Sorry, this version doesn't support multi steps forms"))
+    {
+        rnJQuery('#rnFormType').val('nor');
+        return;
+    }
 
     if(rnJQuery('#rnFormType').val()=='sec')
     {
@@ -405,6 +410,10 @@ RedNaoFormBuilder.prototype.ScrollSettings = function () {
 
 
 RedNaoFormBuilder.prototype.CloneFormElement=function(jQueryElement){
+    if(this.RedNaoFormElements.length>=7&&!RedNaoLicensingManagerVar.LicenseIsValid('Sorry, this version only support up to 8 fields'))
+    {
+        return;
+    }
     var formObject=this.GetFormElementByContainer(jQueryElement);
     var newElement= formObject.Clone();
 

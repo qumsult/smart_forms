@@ -254,3 +254,23 @@
 .sfHelper{
 	width:auto !important;
 }
+
+.smartFormsSlider .ui-widget-overlay{
+    z-index: 1001 !important;
+}
+
+.smartFormsSlider .ui-dialog {
+    z-index: 1002 !important;
+}
+
+#redNaoEmailEditor{
+    z-index: 1003 !important;
+}
+
+.smartFormsSlider .ui-dialog-titlebar-close:before{
+    content:normal;
+}
+
+.licenseDiv .ui-dialog{
+    z-index:10000 !important;
+}

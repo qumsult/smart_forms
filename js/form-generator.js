@@ -33,6 +33,15 @@ function smartFormGenerator(options){
         }
     }
 
+    if(typeof this.client_form_options.Theme!='undefined'&&this.client_form_options.Theme=='material'){
+        this.Theme='material';
+        rnJQuery.RNLoadLibrary([smartFormsPath+'js/bootstrap/material.min.js'],[smartFormsPath+'css/bootstrap/bootstrap-material-scoped.css'],function(){
+
+        });
+    }else
+        this.Theme='basic';
+
+
     this.form_id=options.form_id;
     this.options=options;
     this.RedNaoFormElements=[];
@@ -105,7 +114,8 @@ smartFormGenerator.prototype.SetDefaultIfUndefined=function(propertyName,default
 smartFormGenerator.prototype.CreateForm=function(){
     var container=this.GetRootContainer();
     container.empty();
-    this.JQueryForm=rnJQuery('<form id="sf'+this.form_id+'" class="form-horizontal" ></form>');
+    var themeStyle=this.Theme=='material'?'rnbsm':'';
+    this.JQueryForm=rnJQuery('<form id="sf'+this.form_id+'" class="form-horizontal '+themeStyle+'" ></form>');
     this.JQueryForm.css('visibility','hidden');
     container.append(this.JQueryForm);
 
@@ -212,6 +222,12 @@ smartFormGenerator.prototype.CreatePayPalHiddenFields=function()
         this.JQueryForm.attr('action','https://www.paypal.com/cgi-bin/webscr');
     this.JQueryForm.attr('method','POST');
     this.JQueryForm.attr('target','_self');
+
+    var target="_self";
+    if(window.self !== window.top)
+        target="_parent";
+    this.JQueryForm.attr('target',target);
+
 
     var options=this.client_form_options;
     this.JQueryForm.append(' <input type="hidden" name="cmd" class="smartDonationsPaypalCommand" value="_donations">\

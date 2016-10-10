@@ -42,8 +42,8 @@ class rednao_file_upload extends  rednao_base_elements_renderer{
 
 		return array(
 			"exvalue1"=>htmlspecialchars($html),
-            "exvalue2"=>"",
-            "exvalue3"=>"",
+            "exvalue2"=>$value["path"],
+            "exvalue3"=>$value["ppath"],
             "exvalue4"=>"",
             "exvalue5"=>"",
             "exvalue6"=>""

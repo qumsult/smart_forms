@@ -284,9 +284,12 @@ rnJQuery.fn.RNDialog=function(params,param2)
     return rnDialog.$Dialog;
 };
 
+
+
 function RNDialog($body,params)
 {
     this.Options={};
+    this.$Body=$body;
     this.SetUpOptions(params);
     this.$Dialog=rnJQuery(
         '<div class="modal fade" data-backdrop="static"  style="display: none"  tabindex="-1">'+
@@ -328,6 +331,10 @@ function RNDialog($body,params)
 
     this.$Dialog.find('.modal-body').append($body);
 }
+
+RNDialog.prototype.Destroy=function(){
+    this.$Body.removeData('rndialog');
+};
 
 RNDialog.prototype.CreateButton=function(btnOptions)
 {

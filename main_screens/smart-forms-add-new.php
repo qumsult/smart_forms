@@ -45,16 +45,16 @@ wp_enqueue_script('smart-forms-multiple-step-designer',SMART_FORMS_DIR_URL.'js/m
 
 
 $additionalJS=apply_filters("sf_form_configuration_on_load_js",array());
-$addNewDependencies= array('smart-forms-list-manager','ismart-forms-add-new','isolated-slider','smart-forms-formula-window','smart-forms-formBuilder','smart-forms-select2','smart-forms-event-manager','smart-forms-conditional-manager');
+$addNewDependencies= array('smart-forms-list-manager','ismart-forms-add-new','isolated-slider','smart-forms-formula-window','smart-forms-formBuilder','smart-forms-select2','smart-forms-event-manager','smart-forms-conditional-manager','smart-forms-systemjs-main-config');
 for($i=0;$i<count($additionalJS);$i++){
 
     if(!isset($additionalJS[$i]['dependencies']))
-        $additionalJS[$i]['dependencies']=array('ismart-forms-add-new');
+        $additionalJS[$i]['dependencies']=array('ismart-forms-add-new','smart-forms-systemjs-main-config');
 	wp_enqueue_script($additionalJS[$i]["handler"],$additionalJS[$i]["path"],$additionalJS[$i]['dependencies']);
 	array_push($addNewDependencies,$additionalJS[$i]["handler"]);
 }
-wp_enqueue_script('smart-forms-add-new',SMART_FORMS_DIR_URL.'js/main_screens/smart-forms-add-new.js',$addNewDependencies);
-wp_enqueue_script('smart-forms-icheck',SMART_FORMS_DIR_URL.'js/utilities/iCheck/icheck.min.js',array('isolated-slider'));
+wp_enqueue_script('smart-forms-add-new',SMART_FORMS_DIR_URL.'js/main_screens/smart-forms-add-new-loader.js',$addNewDependencies);
+
 wp_enqueue_script('smart-forms-select2',SMART_FORMS_DIR_URL.'js/utilities/select2/select2.js',array('isolated-slider'));
 wp_enqueue_script('smart-forms-jsColor',SMART_FORMS_DIR_URL.'js/utilities/jsColor/jscolor.js',array('isolated-slider'));
 
@@ -69,11 +69,11 @@ echo "<div class='bootstrap-wrapper' style='position: absolute;width:100%;'><div
 echo "<h1>".__("Forms")."</h1>";
 
 
-wp_enqueue_script('smart-forms-email-editor',SMART_FORMS_DIR_URL.'js/editors/email-editor.js',array('isolated-slider'));
 wp_enqueue_script('smart-forms-style-editor',SMART_FORMS_DIR_URL.'js/editors/style_editor/style-editor.js',array('isolated-slider'));
 wp_enqueue_script('smart-forms-style-elements',SMART_FORMS_DIR_URL.'js/editors/style_editor/element-styler.js',array('isolated-slider','smart-forms-styler-set','smart-forms-style-properties'));
 wp_enqueue_script('smart-forms-style-properties',SMART_FORMS_DIR_URL.'js/editors/style_editor/style-properties.js',array('isolated-slider'));
 wp_enqueue_script('smart-forms-styler-set',SMART_FORMS_DIR_URL.'js/editors/style_editor/styler-set.js',array('isolated-slider'));
+wp_enqueue_script('bootstrap-materialjs',SMART_FORMS_DIR_URL.'js/bootstrap/material.min.js',array('isolated-slider'));
 wp_enqueue_script('json2');
 
 
@@ -82,10 +82,11 @@ wp_enqueue_style('smart-forms-main-style',SMART_FORMS_DIR_URL.'css/mainStyle.css
 wp_enqueue_style('smart-forms-Slider',SMART_FORMS_DIR_URL.'css/smartFormsSlider/jquery-ui-1.10.2.custom.min.css');
 wp_enqueue_style('form-builder-boot-strap',SMART_FORMS_DIR_URL.'css/formBuilder/bootstrap.min.css');
 wp_enqueue_style('form-builder-custom',SMART_FORMS_DIR_URL.'css/formBuilder/custom.css');
-wp_enqueue_style('form-builder-icheck-normal',SMART_FORMS_DIR_URL.'js/utilities/iCheck/skins/minimal/minimal.css');
 wp_enqueue_style('form-builder-select2',SMART_FORMS_DIR_URL.'js/utilities/select2/select2.css');
 wp_enqueue_style('form-builder-fuelux',SMART_FORMS_DIR_URL.'js/utilities/fuelux/fuelux.css');
 
+wp_enqueue_style('bootstrap-material',SMART_FORMS_DIR_URL.'css/bootstrap/bootstrap-material-scoped.css');
+do_action('smart_formsa_include_systemjs');
 if(get_option("SMART_FORMS_REQUIRE_DB_DETAIL_GENERATION")=='y')
 	wp_enqueue_script('smart-forms-detail-generator',SMART_FORMS_DIR_URL.'utilities/smart-forms-detail-generator.js',array('isolated-slider'));
 
@@ -94,8 +95,9 @@ do_action('smart_forms_load_designer_scripts');
 
 
 <script type="text/javascript">
-
+    var smartFormsDesignMode=true;
 	<?php
+
 	$emailFixedFieldListeners=array();
 	$emailFixedFieldListeners=apply_filters('smart-forms-get-email-fixed-field-listener',$emailFixedFieldListeners);
 	echo "var smartFormsFixedFields=".json_encode($emailFixedFieldListeners);
@@ -264,7 +266,7 @@ if(get_option('sf_dont_show_again')===false)
 </h2>
 <div id="redNaoGeneralInfo">
 <div id="redNaoEmailEditor" title="Email" style="display: none;">
-    <table>
+    <table id="emailControls">
         <tr>
             <td style="text-align: right">From email address</td><td> <select  multiple="multiple"  id="redNaoFromEmail" style="width:300px"></td>
 			<td rowspan="5">
@@ -564,6 +566,13 @@ button{
                             <td>
                                 <input type="text"  id="smartFormDescription" style="width: 400px;display: inline-block;" class="form-control"/>
                                 <span style="margin-left: 2px;cursor:hand;cursor:pointer;" data-toggle="tooltip" data-placement="right" title="" class="glyphicon glyphicon-question-sign" data-original-title="<?php echo __("The form description, this is displayed in the form list") ?>"></span>
+                                <div style="width: 200px;display: inline;margin-left: 10px;">
+                                    <span><?php echo __("Theme"); ?></span>
+                                    <select class="form-control rnTheme" style="margin-right: 5px;width: 200px;display: inline;">
+                                        <option selected="selected" value="basic"><?php echo __("Basic"); ?></option>
+                                        <option value="material"><?php echo __("Material"); ?></option>
+                                    </select>
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -605,7 +614,7 @@ button{
                                     <span>Next</span><input type="text" class="form-control" id="nextText"/>
                                 </div>
                                 <div style="width:100px;float:left;display: none;" class="msfText" >
-                                    <span>Complete</span><input type="text" class="form-control"  id="completeText"/>
+                                    <span><?php echo __("Complete")?></span><input type="text" class="form-control"  id="completeText"/>
                                 </div>
 
                             </td>

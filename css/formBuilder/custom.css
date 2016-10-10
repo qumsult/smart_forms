@@ -34,7 +34,7 @@
 }
 
 .bootstrap-wrapper .radio label, .checkbox label{
-    padding-left: 20px;
+    padding-left: 22px;
 }
 
 .bootstrap-wrapper .iradio_minimal,.bootstrap-wrapper .icheckbox_minimal
@@ -229,4 +229,9 @@
     border-color:#a94442;
     border-style:solid;
     border-width: 1px;
+}
+
+#formSettingsScrollArea{
+    -mox-box-sizing: content-box;
+    box-sizing: content-box;
 }

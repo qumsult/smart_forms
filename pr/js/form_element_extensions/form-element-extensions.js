@@ -49,8 +49,23 @@ sfFileUpload.prototype.GetFileUploadComponent=function(jQueryFileContainer)
                               <div class="sfDeleteButton sfDeletebutton_invisible" style="display: table-cell !important"></div></div>');
 
     var self=this;
+    var clickEvent;
+    component.find('.sfUploadFileButton').click(function(){
+        component.closest('.form-group').addClass('is-focused');
+        clickEvent=function(event){
+            if(event.target!=component.find('.sfUploadFileButton')[0])
+            {
+                component.closest('.form-group').removeClass('is-focused');
+                $('body').unbind('click', clickEvent);
+            }
+        };
+        $('body').click(clickEvent);
+    });
+
     component.find('.sfUploadFileButton').change(
     function(){
+        $('body').unbind('click',clickEvent);
+        component.closest('.form-group').removeClass('is-focused');
         var selectedPath=component.find('.sfUploadFileButton').val();
         component.find('.sfUploadFilePath').val(selectedPath);
         if(selectedPath=="")

@@ -382,3 +382,16 @@ function rednao_smart_forms_send_test()
     die();
 }
 
+
+function rednao_smart_forms_edit_form_values()
+{
+    $entryId=GetPostValue("entryId");
+    $entryString=GetPostValue("entryString");
+    $elementOptions=GetPostValue("elementOptions");
+
+
+    include_once(SMART_FORMS_DIR.'php_classes/save/php_entry_editor.php');
+    $phpEditor=new php_entry_editor();
+    echo json_encode(array(result=>$phpEditor->execute_editor($entryId,$entryString,$elementOptions)));
+    die();
+}

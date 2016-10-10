@@ -78,18 +78,49 @@ SfMultipleStepsDesigner.prototype.ShowCreateStepPopUp=function()
 SfMultipleStepsDesigner.prototype.CreateStep=function(stepName,stepPosition,stepIcon)
 {
     this.Options.LatestId++;
-    this.Options.Steps.push({
+    var newStepOptions={
         Text:stepName,
         Icon:stepIcon,
         Id:'s'+this.Options.LatestId,
-        Index:this.Options.Steps.length
-    });
+        Index:this.Options.Steps.length,
+        Fields:[]
+    };
+    this.Options.Steps.push(newStepOptions);
+    this.StepCatalog[newStepOptions.Id]=newStepOptions;
     this.MoveStepTo(this.Options.Steps[this.Options.Steps.length-1],stepPosition);
     this.Generate();
     this.StepDesigner.Hide();
 };
 
 SfMultipleStepsDesigner.prototype.MoveStepTo=function(step,stepPosition){
+    for(var i=0;i<this.FormElements.length;i++){
+        var options=this.FormElements[i].Options;
+        if(typeof options.StepId=='undefined'||options.StepId==''){
+            options.StepId=this.Options.Steps[0].Id;
+        }
+    }
+
+    stepPosition--;//Step position starts with 1
+    stepPosition=Math.max(0,stepPosition);
+    stepPosition=Math.min(this.Options.Steps.length-1,stepPosition);
+    var originalPosition=this.Options.Steps.indexOf(step);
+    this.Options.Steps.splice(originalPosition,1);
+    this.Options.Steps.splice(stepPosition,0,step);
+    for(i=0;i<this.Options.Steps.length;i++){
+        this.Options.Steps[i].Index=i;
+        this.StepCatalog[this.Options.Steps[i].Id].Index=i;
+    }
+
+    this.SortSteps();
+    this.FormElements.splice(0,this.FormElements.length);
+    for(i=0;i<this.SortedSteps.length;i++)
+        for(var h=0;h<this.SortedSteps[i].Fields.length;h++)
+            this.FormElements.push(this.SortedSteps[i].Fields[h]);
+
+
+
+
+    this.Generate();
 
 };
 

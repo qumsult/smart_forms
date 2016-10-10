@@ -202,7 +202,11 @@ SfMultipleStepsBase.prototype.ProcessStepInfo=function()
         this.StepCatalog[currentStepOptions.Id].Text=currentStepOptions.Text;
         this.StepCatalog[currentStepOptions.Id].Fields=[];
     }
+    this.SortSteps();
+};
 
+SfMultipleStepsBase.prototype.SortSteps=function()
+{
     this.SortedSteps=[];
     for(var stepId in this.StepCatalog)
     {
@@ -213,6 +217,7 @@ SfMultipleStepsBase.prototype.ProcessStepInfo=function()
         this.SortedSteps.splice(t,0,currentStep);
     }
 };
+
 
 SfMultipleStepsBase.prototype.CreateFields=function()
 {
